@@ -21,6 +21,14 @@ class LivroAssuntoRepository implements ILivroAssuntoRepository
         return $query->first();
     }
 
+    public function existsAssuntoInLivroAssunto(int $assuntoId): bool
+    {
+        $query = LivroAssunto::select()
+            ->where('assunto_id', $assuntoId);
+
+        return $query->count() > 0;
+    }
+
     public function insert(array $data): LivroAssunto|bool
     {
         if ($livro = LivroAssunto::create($data)) {

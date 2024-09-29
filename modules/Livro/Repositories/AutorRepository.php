@@ -45,4 +45,9 @@ class AutorRepository implements IAutorRepository
 
         return $autor;
     }
+
+    public function delete(Autor $autor): bool
+    {
+        return $autor->delete();
+    }
 }

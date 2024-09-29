@@ -5,16 +5,19 @@ namespace Livro\Services;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Livro\Exceptions\AssuntoCadastrarException;
+use Livro\Exceptions\AssuntoDeletarException;
 use Livro\Exceptions\AssuntoEditarException;
 use Livro\Exceptions\AssuntoNaoEncontradoException;
 use Livro\Models\Assunto;
 use Livro\Repositories\Interfaces\IAssuntoRepository;
+use Livro\Repositories\Interfaces\ILivroAssuntoRepository;
 use Livro\Services\Interfaces\IAssuntoService;
 
 class AssuntoService implements IAssuntoService
 {
     public function __construct(
-        protected readonly IAssuntoRepository $assuntoRepository
+        protected readonly IAssuntoRepository $assuntoRepository,
+        protected readonly ILivroAssuntoRepository $livroAssuntoRepository
     )
     {
     }
@@ -30,9 +33,9 @@ class AssuntoService implements IAssuntoService
         return $assunto;
     }
 
-    public function editar(int $id, array $params): Assunto
+    public function editar(int $assuntoId, array $params): Assunto
     {
-        $assunto = $this->assunto($id);
+        $assunto = $this->assunto($assuntoId);
 
         $assunto = $this->assuntoRepository->update($assunto, $params);
 
@@ -41,6 +44,24 @@ class AssuntoService implements IAssuntoService
         }
 
         return $assunto;
+    }
+
+    public function deletar(int $assuntoId): bool
+    {
+        $assunto = $this->assunto($assuntoId);
+
+        if ($this->livroAssuntoRepository->existsAssuntoInLivroAssunto($assuntoId)) {
+            throw new AssuntoDeletarException('Assunto está em um ou mais livros. Não pode ser deletado');
+
+        }
+
+        try {
+            $this->assuntoRepository->delete($assunto);
+        } catch (\Exception $exception) {
+            throw new AssuntoDeletarException();
+        }
+
+        return true;
     }
 
     public function assunto(int $assuntoId): Assunto

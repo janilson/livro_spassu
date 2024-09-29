@@ -83,13 +83,13 @@ class AutorController extends Controller
      *
      * @param \Livro\Http\Requests\AutorRequest $request
      *
-     * @param \Livro\Models\Autor $autor
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(AutorRequest $request, $id)
+    public function update(AutorRequest $request, int $id)
     {
-        $autor = $this->autorService->editar($id, $request->all());
+        $this->autorService->editar($id, $request->all());
 
         return redirect()->route('autor.index')
             ->with('success', 'Autor atualizado com sucesso.');
@@ -98,15 +98,23 @@ class AutorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \Livro\Models\Autor $autor
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Autor $autor)
+    public function destroy(int $id)
     {
-        $autor->delete();
+        $type = 'success';
+        $msg = 'Autor removido com sucesso.';
+
+        try {
+            $this->autorService->deletar($id);
+        } catch (\Exception $exception) {
+            $type = 'error';
+            $msg = $exception->getMessage();
+        }
 
         return redirect()->route('autor.index')
-            ->with('success', 'Autor removido com sucesso.');
+            ->with($type, $msg);
     }
 }

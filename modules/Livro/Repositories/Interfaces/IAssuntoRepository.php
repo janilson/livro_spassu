@@ -38,4 +38,11 @@ interface IAssuntoRepository
      * @return Assunto|bool
      */
     public function update(Assunto $assunto, array $data): Assunto|bool;
+
+    /**
+     * @params Assunto $assunto
+     *
+     * @return bool
+     */
+    public function delete(Assunto $assunto): bool;
 }

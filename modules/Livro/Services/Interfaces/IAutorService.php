@@ -8,11 +8,18 @@ use Livro\Models\Autor;
 
 interface IAutorService
 {
+    /**
+     * @params array $params
+     *
+     *
+     */
     public function cadastrar(array $params): Autor;
 
     public function editar(int $id, array $params): Autor;
 
-    public function autor(int $autor): Autor;
+    public function deletar(int $autorId): bool;
+
+    public function autor(int $autorId): Autor;
 
     public function autores(?array $params = null): Collection|LengthAwarePaginator|array;
 }

@@ -15,6 +15,13 @@ interface ILivroAutorRepository
     public function getLivroAutor(int $livroId, int $autorId): LivroAutor|null;
 
     /**
+     * @params int $autorId
+     *
+     * @return bool
+     */
+    public function existsAutorInLivroAutor(int $autorId): bool;
+
+    /**
      * @params array $data
      *
      * @return LivroAutor|bool

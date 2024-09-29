@@ -38,4 +38,11 @@ interface IAutorRepository
      * @return Autor|bool
      */
     public function update(Autor $autor, array $data): Autor|bool;
+
+    /**
+     * @params Autor $autor
+     *
+     * @return bool
+     */
+    public function delete(Autor $autor): bool;
 }

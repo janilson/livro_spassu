@@ -12,6 +12,8 @@ interface IAssuntoService
 
     public function editar(int $id, array $params): Assunto;
 
+    public function deletar(int $assuntoId): bool;
+
     public function assunto(int $assunto): Assunto;
 
     public function assuntos(?array $params = null): Collection|LengthAwarePaginator|array;

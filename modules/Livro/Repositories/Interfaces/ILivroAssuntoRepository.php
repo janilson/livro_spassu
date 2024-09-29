@@ -15,6 +15,13 @@ interface ILivroAssuntoRepository
     public function getLivroAssunto(int $livroId, int $assuntoId): LivroAssunto|null;
 
     /**
+     * @params int $assuntoId
+     *
+     * @return bool
+     */
+    public function existsAssuntoInLivroAssunto(int $assuntoId): bool;
+
+    /**
      * @params array $data
      *
      * @return LivroAssunto|bool

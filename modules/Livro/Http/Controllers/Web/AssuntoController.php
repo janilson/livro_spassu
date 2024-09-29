@@ -15,7 +15,6 @@ class AssuntoController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
      * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
@@ -28,8 +27,6 @@ class AssuntoController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
      * @return \Illuminate\Http\Response
      */
     public function create()
@@ -38,8 +35,6 @@ class AssuntoController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
      * @param \Livro\Http\Requests\AssuntoRequest $request
      *
      * @return \Illuminate\Http\Response
@@ -53,21 +48,19 @@ class AssuntoController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param \Livro\Models\Assunto $assunto
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Assunto $assunto)
+    public function show(int $id)
     {
+        $assunto = $this->assuntoService->assunto($id);
+
         return view('assunto.show', compact('assunto'));
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \Livro\Models\Assunto $assunto
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -79,11 +72,8 @@ class AssuntoController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
      * @param \Livro\Http\Requests\AssuntoRequest $request
-     *
-     * @param \Livro\Models\Assunto $assunto
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -96,17 +86,23 @@ class AssuntoController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param \Livro\Models\Assunto $assunto
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Assunto $assunto)
+    public function destroy(int $id)
     {
-        $assunto->delete();
+        $type = 'success';
+        $msg = 'Assunto removido com sucesso.';
+
+        try {
+            $this->assuntoService->deletar($id);
+        } catch (\Exception $exception) {
+            $type = 'error';
+            $msg = $exception->getMessage();
+        }
 
         return redirect()->route('assunto.index')
-            ->with('success', 'Assunto removido com sucesso.');
+            ->with($type, $msg);
     }
 }

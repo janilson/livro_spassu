@@ -21,6 +21,14 @@ class LivroAutorRepository implements ILivroAutorRepository
         return $query->first();
     }
 
+    public function existsAutorInLivroAutor(int $autorId): bool
+    {
+        $query = LivroAutor::select()
+            ->where('autor_id', $autorId);
+
+        return $query->count() > 0;
+    }
+
     public function insert(array $data): LivroAutor|bool
     {
         if ($livro = LivroAutor::create($data)) {

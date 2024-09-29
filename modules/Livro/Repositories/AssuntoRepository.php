@@ -45,4 +45,9 @@ class AssuntoRepository implements IAssuntoRepository
 
         return $assunto;
     }
+
+    public function delete(Assunto $assunto): bool
+    {
+        return $assunto->delete();
+    }
 }
