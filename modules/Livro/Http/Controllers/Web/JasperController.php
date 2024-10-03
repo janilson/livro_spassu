@@ -3,11 +3,11 @@
 namespace Livro\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use Livro\Services\JasperService;
+use Livro\Services\Interfaces\IJasperService;
 
 class JasperController extends Controller
 {
-    public function __construct(protected readonly JasperService $jasperService)
+    public function __construct(protected readonly IJasperService $jasperService)
     {
     }
 
@@ -15,4 +15,5 @@ class JasperController extends Controller
     {
         return $this->jasperService->report($name, $ext);
     }
+
 }

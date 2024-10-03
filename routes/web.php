@@ -37,4 +37,5 @@ Route::controller(LivroController::class)->group(function () {
     Route::delete('livro/{id}/delete', 'destroy')->name('livro.destroy');
 });
 
-Route::get('jasper/report/{name}/{ext?}', [\Livro\Http\Controllers\Web\JasperController::class, 'report']);
+Route::get('jasper/report/{name}/{ext?}', [\Livro\Http\Controllers\Web\JasperController::class, 'report'])->name('relatorio');
+

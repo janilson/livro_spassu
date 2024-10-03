@@ -8,9 +8,9 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote')->hourly();
 
-//Artisan::command("jasper:build {file?}", function ($file = "") {
-//    $this->comment(JasperController::UpdateReports($file));
-//});
+Artisan::command("jasper:build {file?}", function ($file = "") {
+    $this->comment(\Livro\Services\JasperService::UpdateAllReports($file));
+});
 //Artisan::command("jasper:test", function () {
 //    $this->comment(JasperController::console());
 //});

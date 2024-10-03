@@ -29,9 +29,33 @@ class JasperService implements IJasperService
         return $files;
     }
 
+    public static function UpdateAllReports($file = "")
+    {
+        $new = new PHPJasper;
+
+        $path = storage_path(source_path);
+        if ($file != "") {
+            $file .= ".jrxml";
+            $file = $path . "/" . $file;
+            if (file_exists($file)) {
+                $new->compile($file);
+                return "Build Successfully!";
+            } else {
+                return "Sorry! no Report file Found in " . $path;
+            }
+        } else {
+            $reports = $new->readFiles($path);
+            foreach ($reports as $key => $report) {
+                $new->compile($report);
+            }
+            return "All Reports Build Successfully!";
+        }
+    }
+
+
     public function updateReports($file = "")
     {
-        $path = resource_path(source_path);
+        $path = storage_path(source_path);
         if ($file != "") {
             $file .= ".jrxml";
             $file = $path . "/" . $file;
@@ -52,7 +76,7 @@ class JasperService implements IJasperService
 
     public function compile($input)
     {
-        $output = resource_path(compiled_path);
+        $output = storage_path(compiled_path);
         $this->phpJasper->compile($input, $output)->execute();
     }
 
@@ -128,7 +152,7 @@ class JasperService implements IJasperService
 
     public function report($report, $ext = "pdf")
     {
-        $src = resource_path(source_path);
+        $src = storage_path(source_path);
         $reports = $this->readFiles($src);
 
         if (!isset($reports[$report . ".jrxml"])) {
@@ -140,9 +164,9 @@ class JasperService implements IJasperService
 //        $user_id = $user->id;
         // $business_id = $user->business_id;
 
-        $input = resource_path(compiled_path) . '/' . $report . '.jasper';
+        $input = storage_path(compiled_path) . '/' . $report . '.jasper';
 
-        $output = $this->dirCheck(resource_path(output_path) . "/user_");
+        $output = $this->dirCheck(storage_path(output_path) . "/user_");
         $options = [
             'locale' => 'pt_BR',
             'db_connection' => [
