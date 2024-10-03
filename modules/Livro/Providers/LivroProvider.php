@@ -17,7 +17,9 @@ use Livro\Services\AssuntoService;
 use Livro\Services\AutorService;
 use Livro\Services\Interfaces\IAssuntoService;
 use Livro\Services\Interfaces\IAutorService;
+use Livro\Services\Interfaces\IJasperService;
 use Livro\Services\Interfaces\ILivroService;
+use Livro\Services\JasperService;
 use Livro\Services\LivroService;
 
 class LivroProvider extends ServiceProvider
@@ -37,6 +39,7 @@ class LivroProvider extends ServiceProvider
         //Services
         $this->app->bind(IAssuntoService::class, AssuntoService::class);
         $this->app->bind(IAutorService::class, AutorService::class);
+        $this->app->bind(IJasperService::class, JasperService::class);
         $this->app->bind(ILivroService::class, LivroService::class);
     }
 

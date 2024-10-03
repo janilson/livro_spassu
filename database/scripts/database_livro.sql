@@ -25,11 +25,12 @@ CREATE TABLE `assunto`
 
 CREATE TABLE `livro`
 (
-    `id`             int         NOT NULL AUTO_INCREMENT,
-    `titulo`         varchar(40) NOT NULL,
-    `editora`        varchar(40) NOT NULL,
-    `edicao`         varchar(2)  NOT NULL,
-    `ano_publicacao` varchar(4)  NOT NULL,
+    `id`             int          NOT NULL AUTO_INCREMENT,
+    `titulo`         varchar(40)  NOT NULL,
+    `editora`        varchar(40)  NOT NULL,
+    `edicao`         varchar(2)   NOT NULL,
+    `valor`          decimal(3,2) NOT NULL,
+    `ano_publicacao` varchar(4)   NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4

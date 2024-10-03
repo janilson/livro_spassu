@@ -5,6 +5,8 @@ use Livro\Http\Controllers\Web\AssuntoController;
 use Livro\Http\Controllers\Web\AutorController;
 use Livro\Http\Controllers\Web\LivroController;
 
+Route::redirect('/', '/livro');
+
 Route::controller(AssuntoController::class)->group(function () {
     Route::get('assunto', 'index')->name('assunto.index');
     Route::get('assunto/new', 'create')->name('assunto.create');
@@ -35,4 +37,4 @@ Route::controller(LivroController::class)->group(function () {
     Route::delete('livro/{id}/delete', 'destroy')->name('livro.destroy');
 });
 
-Route::get('jasper/report/{name}/{ext?}', [\App\Http\Controllers\Web\JasperController::class, 'report']);
+Route::get('jasper/report/{name}/{ext?}', [\Livro\Http\Controllers\Web\JasperController::class, 'report']);

@@ -28,6 +28,7 @@
                 <th>Título</th>
                 <th>Editora</th>
                 <th>Edição</th>
+                <th>Valor (R$)</th>
                 <th>Ano Publi.</th>
                 <th width="180px">Ações</th>
             </tr>
@@ -37,6 +38,7 @@
                     <td>{{ $livro->titulo }}</td>
                     <td>{{ $livro->editora }}</td>
                     <td>{{ $livro->edicao }}</td>
+                    <td>{{ $livro->valor }}</td>
                     <td>{{ $livro->ano_publicacao }}</td>
                     <td>
                         <form action="{{ route('livro.destroy',$livro->id) }}" method="Post">

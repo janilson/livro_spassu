@@ -3,13 +3,14 @@
 namespace Livro\Services;
 
 use Illuminate\Support\Facades\Response;
+use Livro\Services\Interfaces\IJasperService;
 use PHPJasper\PHPJasper;
 
 define('source_path', 'app/report/source/MyReports/src');
 define('compiled_path', 'app/report/compiled');
 define('output_path', 'app/report/output');
 
-class JasperService
+class JasperService implements IJasperService
 {
     public function __construct(protected readonly PHPJasper $phpJasper)
     {
@@ -55,7 +56,7 @@ class JasperService
         $this->phpJasper->compile($input, $output)->execute();
     }
 
-    public function dir_check($path)
+    public function dirCheck($path)
     {
         if (!file_exists($path)) {
             mkdir($path, 0777, true);
@@ -141,7 +142,7 @@ class JasperService
 
         $input = resource_path(compiled_path) . '/' . $report . '.jasper';
 
-        $output = $this->dir_check(resource_path(output_path) . "/user_");
+        $output = $this->dirCheck(resource_path(output_path) . "/user_");
         $options = [
             'locale' => 'pt_BR',
             'db_connection' => [

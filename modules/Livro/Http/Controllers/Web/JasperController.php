@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web;
+namespace Livro\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use Livro\Services\JasperService;

@@ -59,6 +59,15 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <strong>Valor (R$):</strong>
+                            <input type="text" name="valor" class="form-control" placeholder="Valor"
+                                   value="{{ $livro->valor }}"
+                                   data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'"/>
+                            @error('valor')
+                            <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <strong>Assuntos:</strong>
                             <select name="assuntos[]" class="form-control" multiple aria-label="Assuntos">
                                 @php
