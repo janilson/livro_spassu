@@ -12,5 +12,9 @@ trait AutorTrait
         if (isset($params['id'])) {
             $query->where('autor.id', $params['id']);
         }
+
+        if (isset($params['nome'])) {
+            $query->where('autor.nome', 'like', '%' . $params['nome'] . '%');
+        }
     }
 }

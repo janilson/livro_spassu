@@ -2,6 +2,7 @@
 
 namespace Livro\Services;
 
+use App\Helper\Helper;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -28,6 +29,8 @@ class LivroService implements ILivroService
         try {
             DB::beginTransaction();
 
+            $params['valor'] = Helper::formatarMonetario($params['valor']);
+
             $assuntos = $params['assuntos'];
             $autores = $params['autores'];
 
@@ -48,7 +51,7 @@ class LivroService implements ILivroService
             DB::commit();
         } catch (\Exception $exception) {
             DB::rollBack();
-            throw new LivroCadastrarException();
+            throw new LivroCadastrarException($exception->getMessage());
         }
 
         return $livro;

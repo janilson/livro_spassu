@@ -52,7 +52,6 @@ class AutorService implements IAutorService
 
         if ($this->livroAutorRepository->existsAutorInLivroAutor($autorId)) {
             throw new AutorDeletarException('Autor está em um ou mais livros. Não pode ser deletado');
-
         }
 
         try {
@@ -77,7 +76,7 @@ class AutorService implements IAutorService
 
     public function autores(?array $params = null): Collection|LengthAwarePaginator|array
     {
-        $perPage = (int)($params['per_page'] ?? 10);
+        $perPage = (int)($params['page'] ?? 10);
         $all = $params['all'] ?? false;
 
         return $this->autorRepository->allAutores($params, $perPage, $all);

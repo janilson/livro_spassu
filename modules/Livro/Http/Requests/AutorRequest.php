@@ -9,7 +9,7 @@ class AutorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => 'required',
+            'nome' => 'required|min:3|max:20',
         ];
     }
 
@@ -17,6 +17,8 @@ class AutorRequest extends FormRequest
     {
         return [
             'nome.required' => 'Nome é obrigatório.',
+            'nome.min' => 'Nome tem que ter min 3 char.',
+            'nome.max' => 'Nome máx. de 20 char',
         ];
     }
 }
